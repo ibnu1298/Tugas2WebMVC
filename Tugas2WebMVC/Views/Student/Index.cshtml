@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Tugas2WebMVC.Models.Student>
+
+@{
+	ViewData["Title"] = "List Student";
+}
+
+<h1 class="my-3">List Student</h1>
+<div class="card my-3" >
+	<div class="card-body">
+		<div class="col-md-8">
+			<div>
+				<!--Ini Untuk Informasi dari action lain-->
+				@if (ViewData["pesan"] != null)
+				{
+					@Html.Raw(ViewData["pesan"])
+				}
+			</div>
+			<p class="my-3">
+				<a asp-action="Create">Create New</a> |
+				<a asp-action="WithCourse">With Course</a>
+			</p>
+			<p class="my-3">
+				<form asp-action="Index" method="get">
+					<input name="Name" type="text" placeholder="Masukan Nama" class="form-control-md" style="padding:5px; padding-left:15px; width:auto; height:auto;"/>
+					<input type="submit" value="Cari" class="btn btn-primary btn-sm"/>
+				</form>
+			</p>
+			<table class="table table-striped my-3">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Date</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr class="py-auto">
+							<td>
+								@Html.DisplayFor(modelItem => item.id)
+							</td>
+							<td style="color:black">
+								@Html.DisplayFor(modelItem => item.firstMidName) @Html.DisplayFor(modelItem => item.lastName)
+							</td>
+							<td style="color:black">
+								@Html.DisplayFor(modelItem => item.enrollmentDate)
+							</td>
+							<td>
+								<a class="btn btn-sm btn-warning" asp-action="Update"
+                               asp-route-id="@item.id">Update</a>
+                                <a class="btn btn-sm btn-info" asp-action="Details"
+                               asp-route-id="@item.id">Details</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete"
+                               asp-route-id="@item.id">Delete</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

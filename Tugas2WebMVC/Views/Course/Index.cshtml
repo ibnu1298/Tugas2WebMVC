@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Tugas2WebMVC.Models.Course>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1 class="my-3">List Course</h1>
+<div class="card my-3">
+	<div class="card-body">
+		<div class="col-md-8">
+			<div>
+				<!--Ini Untuk Informasi dari action lain-->
+				@if (ViewData["pesan"] != null)
+				{
+					@Html.Raw(ViewData["pesan"])
+				}
+			</div>
+			<p class="my-3">
+				<a asp-action="Create">Create New</a> | 
+				<a asp-action="WithStudent">With Student</a>
+			</p>
+			<p class="my-3">
+				<form asp-action="Index" method="get">
+					<input name="Name" type="text" placeholder="Masukan Title" class="form-control-md" style="padding:5px; padding-left:15px; width:auto; height:auto;"/>
+					<input type="submit" value="Cari" class="btn btn-primary btn-sm"/>
+				</form>
+			</p>
+			<table class="table table-striped my-3" style="color:black">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Title</th>
+						<th>Credits</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.courseID)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.title)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.credits)
+							</td>
+							<td style="text-align:center">
+								<a class="btn btn-sm btn-warning" asp-action="Update"
+                               asp-route-id="@item.courseID">Update</a>
+                                <a class="btn btn-sm btn-info" asp-action="Details"
+                               asp-route-id="@item.courseID">Details</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete"
+                               asp-route-id="@item.courseID">Delete</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

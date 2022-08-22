@@ -1,0 +1,75 @@
+﻿@model Tugas2WebMVC.Models.StudentCourse
+
+@{
+	ViewData["Title"] = "Details Student";
+}
+
+<h1 style="color:black" class="my-3">Details Student</h1>
+<div class="card my-3 col-6">
+	<div class="card-body">
+		<div>
+			<dl class="row">
+				<dt class="col-sm-3">ID</dt>
+				<dd class="col-sm-9" style="color:black">@Html.DisplayFor(model => model.id)</dd>
+				<dt class="col-sm-3">Firstname</dt>
+				<dd class="col-sm-9" style="color:black">@Html.DisplayFor(model => model.firstMidName)</dd>
+				<dt class="col-sm-3">Lastname</dt>
+				<dd class="col-sm-9" style="color:black">@Html.DisplayFor(model => model.lastName)</dd>
+				<dt class="col-sm-3">Date</dt>
+				<dd class="col-sm-9" style="color:black">@Html.DisplayFor(model => model.enrollmentDate)</dd>
+				@if (@Model.Enrollments.Count() == 1)
+				{
+					<dt class="col-sm-3">Course</dt>
+					<table class="col-sm-6 table table-striped">
+						<thead>
+							<tr>
+								<th>Grade</th>
+								<th>Title</th>
+								<th>Credits</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var enroll in Model.Enrollments)
+							{
+								<tr>
+									<td partial name="_Grade" model="item">@enroll.grade</td>
+									<td style="color:black">@enroll.course.title</td>
+									<td style="color:black">@enroll.course.credits</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				}
+				@if (@Model.Enrollments.Count() > 1)
+				{
+					<dt class="col-sm-3">Courses</dt>
+					<table class="col-sm-6 table table-striped">
+						<thead style="background-color:#C0C0C0">
+							<tr>
+								<th>Grade</th>
+								<th>Title</th>
+								<th>Credits</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var enroll in Model.Enrollments)
+							{
+								<tr>
+									<td partial name="_Grade" model="item">@enroll.grade</td>
+									<td style="color:black">@enroll.course.title</td>
+									<td style="color:black">@enroll.course.credits</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				}
+
+			</dl>
+			<div>
+				<a asp-action="Update"
+				   asp-route-id="@Model.id">Edit</a> |
+				<a asp-action="Index">Back to List</a>
+			</div>
+		</div>
+	</div>
+</div>

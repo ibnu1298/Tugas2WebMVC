@@ -1,0 +1,51 @@
+﻿@model Tugas2WebMVC.Models.Course
+
+@{
+	ViewData["Title"] = "Create Course";
+}
+
+<h1> Create Course</h1>
+
+<hr />
+<div>
+	@if (ViewData["pesan"] != null)
+	{
+		@Html.Raw(ViewData["pesan"])
+	}
+</div>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="courseID" class="form-label"></label>
+				<input asp-for="courseID" class="form-control" />
+				<span asp-validation-for="courseID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="title" class="form-label"></label>
+				<input asp-for="title" class="form-control" />
+				<span asp-validation-for="title" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="credits" class="form-label"></label>
+				<input asp-for="credits" class="form-control" />
+				<span asp-validation-for="credits" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	}

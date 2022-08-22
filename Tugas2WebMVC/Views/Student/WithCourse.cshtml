@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Tugas2WebMVC.Models.StudentCourse>
+
+@{
+	ViewData["Title"] = "Student With Course";
+}
+
+<h1 class="my-3">List Student With Course</h1>
+<div class="card my-3">
+	<div class="card-body">
+		<div class="col-md-10">
+			<div>
+				<!--Ini Untuk Informasi dari action lain-->
+				@if (ViewData["pesan"] != null)
+				{
+					@Html.Raw(ViewData["pesan"])
+				}
+			</div>
+			<p class="my-3">
+				<a asp-action="Create">Create New</a>
+			</p>
+			<p class="my-3">
+				<form asp-action="WithCourse" method="get">
+					<input name="Name" type="text" placeholder="Masukan Title" class="form-control-md" style="padding:5px; padding-left:15px; width:auto; height:auto;" />
+					<input type="submit" value="Cari" class="btn btn-primary btn-sm" />
+				</form>
+			</p>
+			<table class="table table-bordered my-3">
+				<thead>
+					<tr >
+						<th rowspan="2" class="align-middle text-center">ID</th>
+						<th rowspan="2" class="align-middle text-center">Name</th>
+						<th rowspan="2" class="align-middle text-center">Date</th>
+						<th colspan="3" style="text-align:center">Course</th>
+						<th rowspan="2"></th>
+					</tr>
+					<tr>
+						<th style="text-align:center">Grade</th>
+						<th style="text-align:center">Title</th>
+						<th style="text-align:center">Credits</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr style="color:black;">
+							<td class="align-middle" style="text-align:center">@Html.DisplayFor(modelItem => item.id)</td>
+							<td class="align-middle">@Html.DisplayFor(modelItem => item.firstMidName) @Html.DisplayFor(modelItem => item.lastName) </td>
+							<td class="align-middle">@Html.DisplayFor(modelItem => item.enrollmentDate)</td>
+							<td style="text-align:center">
+								@foreach (var enroll in item.Enrollments)
+								{
+
+									<ul>
+										<li>@enroll.grade</li>
+									</ul>
+								}
+							</td>
+							<td>
+								@foreach (var enroll in item.Enrollments)
+								{
+
+									<ul>
+										<li>@enroll.course.title</li>
+									</ul>
+								}
+							</td>
+							<td style="text-align:center">
+								@foreach (var enroll in item.Enrollments)
+								{
+
+									<ul>
+										<li>@enroll.course.credits</li>
+									</ul>
+								}
+							</td>
+							<td style="text-align:center" class="align-middle">
+								<a class="btn btn-sm btn-warning" asp-action="Update"
+							   asp-route-id="@item.id">Update</a>
+								<a class="btn btn-sm btn-info" asp-action="Details"
+							   asp-route-id="@item.id">Details</a>
+								<a class="btn btn-sm btn-danger" asp-action="Delete"
+							   asp-route-id="@item.id">Delete</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+	<div class="my-6">
+		@if (ViewData["pesan"] != null)
+		{
+			@Html.Raw(ViewData["pesan"])
+		}
+	</div>
+	<div style="margin-top:200px; color:black;" class="text-center">
+		<h1>Halo, Kamu belum login</h1>
+		<div>Silakan login terlebih dahulu untuk bisa mendapatkan akses sesuai Role yang kamu miliki</div>
+	</div>
+</div>

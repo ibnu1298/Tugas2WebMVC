@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Tugas2WebMVC.Models.UserToRole>
+
+@{
+	ViewData["Title"] = "UserRole";
+}
+
+<h1>UserRole</h1>
+<div>
+	<!--Ini Untuk Informasi dari action lain-->
+	@if (ViewData["pesan"] != null)
+	{
+		@Html.Raw(ViewData["pesan"])
+	}
+</div>
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table table-striped" style="color:black;">
+	<thead>
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Email
+			</th>
+			<th>
+				Roles
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.Lastname)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Email)
+				</td>
+				<td>
+					@foreach (var roles in item.UserRoles)
+					{
+						<ul>
+							<li>@roles.Role.Name</li>
+						</ul>
+					}
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+					@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+					@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

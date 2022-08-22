@@ -1,0 +1,10 @@
+﻿@{
+	ViewData["Title"] = "Wellcome";
+}
+@if (User.Identity.IsAuthenticated)
+{
+	<div style="margin-top:200px; color:black;" class="text-center">
+		<h1>Selamat Datang @User.Identity.Name</h1>
+		<div>Anda bisa mengakses halaman sesuai dengan Role yang anda miliki</div>
+	</div>
+}
